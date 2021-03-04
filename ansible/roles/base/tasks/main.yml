@@ -8,3 +8,6 @@
 
 - name: setup sshd
   include_tasks: "setup_sshd.yml"
+
+- name: setup timesyncd
+  include_tasks: "setup_timesyncd.yml"

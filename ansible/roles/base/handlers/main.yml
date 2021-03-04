@@ -5,3 +5,9 @@
   systemd:
     name: sshd
     state: reloaded
+
+- name: restart timesyncd
+  become: true
+  systemd:
+    name: systemd-timesyncd
+    state: restarted

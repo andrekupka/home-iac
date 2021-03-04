@@ -1,0 +1,14 @@
+---
+
+- name: make sure ntp package is absent
+  become: true
+  package:
+    name: ntp
+    state: absent
+
+- name: configure ntp servers in timesyncd config
+  become: true
+  template:
+    src: timesyncd.conf
+    dest: /etc/systemd/timesyncd.conf
+  notify: restart timesyncd
