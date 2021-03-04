@@ -1,0 +1,52 @@
+---
+
+- name: install exim4 package
+  become: true
+  package:
+    name:
+      - 'exim4'
+
+- name: configure relay host and credentials
+  become: true
+  template:
+    src: exim4-passwd.client
+    dest: /etc/exim4/passwd.client
+
+- name: remove exim4 config files
+  become: true
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_items:
+    - "/etc/exim4/update-exim4.conf.conf"
+    - "/etc/mailname"
+
+- name: configure exim4 with debconf
+  become: true
+  debconf:
+    name: exim4-config
+    question: '{{ item.key }}'
+    vtype: 'string'
+    value: '{{ item.value }}'
+  with_dict:
+    exim4/dc_relay_nets:
+    exim4/hide_mailname: 'true'
+    exim4/dc_smarthost: '{{ base_exim4_relay_host }}:{{ base_exim4_relay_port }}'
+    exim4/dc_readhost: '{{ inventory_hostname }}'
+    exim4/dc_localdelivery: 'mbox format in /var/mail'
+    exim4/dc_local_interface: '127.0.0.1 ; ::1'
+    exim4/mailname: '{{ inventory_hostname }}'
+    exim4/dc_other_hostnames: '{{ inventory_hostname }}'
+    exim4/use_split_config: 'false'
+    exim4/dc_minimaldns: 'false'
+    exim4/dc_eximconfig_configtype: 'mail sent by smarthost; received via SMTP or fetchmail'
+
+- name: reconfigure exim4-config
+  become: true
+  command: dpkg-reconfigure -fnoninteractive exim4-config
+
+- name: setup email-addresses
+  become: true
+  template:
+    src: email-addresses
+    dest: '/etc/email-addresses'

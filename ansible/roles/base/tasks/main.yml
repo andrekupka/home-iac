@@ -11,3 +11,6 @@
 
 - name: setup timesyncd
   include_tasks: "setup_timesyncd.yml"
+
+- name: setup exim4 local relay
+  include_tasks: "setup_exim4.yml"

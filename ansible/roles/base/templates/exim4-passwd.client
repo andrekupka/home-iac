@@ -1,0 +1,3 @@
+{{ ansible_managed | comment }}
+
+{{ base_exim4_relay_host }}:{{ base_exim4_relay_user }}:{{ base_exim4_relay_password }}
