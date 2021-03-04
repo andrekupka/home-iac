@@ -21,4 +21,6 @@ X11Forwarding no
 
 PrintMotd no
 
+LogLevel INFO
+
 Subsystem sftp /usr/lib/openssh/sftp-server
