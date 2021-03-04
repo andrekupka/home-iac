@@ -1,0 +1,7 @@
+---
+
+- name: reload sshd
+  become: true
+  systemd:
+    name: sshd
+    state: reloaded

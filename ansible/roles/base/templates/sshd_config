@@ -1,0 +1,24 @@
+{{ ansible_managed | comment }}
+
+Port 22
+ListenAddress 0.0.0.0
+ListenAddress ::
+
+PermitRootLogin no
+PubkeyAuthentication yes
+PasswordAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+
+UsePAM yes
+
+AllowAgentForwarding yes
+AllowTcpForwarding yes
+
+ClientAliveInterval 120
+
+X11Forwarding no
+
+PrintMotd no
+
+Subsystem sftp /usr/lib/openssh/sftp-server

@@ -5,3 +5,6 @@
 
 - name: setup locales
   include_tasks: "setup_locales.yml"
+
+- name: setup sshd
+  include_tasks: "setup_sshd.yml"
