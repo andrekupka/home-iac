@@ -65,4 +65,7 @@ variable "ssh_user" {
 variable "ssh_public_key" {
   type = string
   description = "The ssh public key to access the vm"
+  default = <<EOF
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGIX7oELyELsYahS6zigtbzvi9PNtqz0DFHthe1YYWb7 iac@home
+  EOF
 }
