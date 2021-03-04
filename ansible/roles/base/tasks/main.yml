@@ -1,0 +1,7 @@
+---
+
+- name: installation of basic packages
+  include_tasks: "install_packages.yml"
+
+- name: setup locales
+  include_tasks: "setup_locales.yml"

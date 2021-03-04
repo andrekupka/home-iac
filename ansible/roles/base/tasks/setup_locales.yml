@@ -1,0 +1,22 @@
+---
+
+- name: Generate locales for '{{ base_system_locale }}'
+  become: yes
+  locale_gen:
+    name: "{{ base_system_locale }}"
+    state: present
+
+- name: Get current locale and language configuration
+  command: localectl status
+  register: locale_status
+  changed_when: false
+  check_mode: false
+
+- name: Parse 'LANG' from current locale and language configuration
+  set_fact:
+    locale_lang: "{{ locale_status.stdout | regex_search('LANG=([^\n]+)', '\\1') | default(['LOCALE_NOT_YET_SET'], true) | first }}"
+
+- name: Configure locale to '{{ base_system_locale }}'
+  command: localectl set-locale LANG={{ base_system_locale }}
+  become: yes
+  when: locale_lang != base_system_locale

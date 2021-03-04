@@ -1,0 +1,7 @@
+---
+# this playbook performs a basic debian setup
+
+- name: setup basic configuration
+  hosts: proxmox
+  roles:
+    - base

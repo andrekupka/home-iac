@@ -1,0 +1,18 @@
+---
+
+- name: make sure base packages are installed
+  become: true
+  package:
+    name:
+      - 'git'
+      - 'apt-transport-https'
+      - 'rsync'
+      - 'htop'
+      - 'vim'
+      - 'tmux'
+      - 'wget'
+      - 'curl'
+      - 'tree'
+      - 'zsh'
+      - 'unattended-upgrades'
+      - 'apt-listchanges'
