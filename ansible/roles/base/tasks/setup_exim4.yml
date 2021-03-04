@@ -40,6 +40,8 @@
     exim4/use_split_config: 'false'
     exim4/dc_minimaldns: 'false'
     exim4/dc_eximconfig_configtype: 'mail sent by smarthost; received via SMTP or fetchmail'
+  tags:
+    - debconf
 
 - name: reconfigure exim4-config
   become: true

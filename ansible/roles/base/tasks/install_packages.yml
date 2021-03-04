@@ -14,5 +14,4 @@
       - 'curl'
       - 'tree'
       - 'zsh'
-      - 'unattended-upgrades'
       - 'apt-listchanges'
