@@ -1,0 +1,26 @@
+---
+
+- name: create group freakout
+  become: true
+  group:
+    gid: '{{ user_group_id }}'
+    name: '{{ user_group_name }}'
+
+- name: create user freakout
+  become: true
+  user:
+    name: '{{ user_name }}'
+    uid: '{{ user_id }}'
+    create_home: yes
+    group: '{{ user_group_name }}'
+    groups:
+      - sudo
+    shell: '/usr/bin/zsh'
+    password: "{{ user_password | password_hash('sha512', user_salt) }}"
+
+- name: update authorized keys
+  become: true
+  authorized_key:
+    user: "{{ user_name }}"
+    key: "{{ user_ssh_public_keys }}"
+    exclusive: true

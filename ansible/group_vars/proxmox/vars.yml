@@ -1,2 +1,5 @@
 ---
 ansible_user: iac
+
+user_ssh_public_keys: |
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJKzvQ2Y0sMAvD/uq8z+7cb9G9o3A0jinpZesGn3aHJh freakout@radagast

@@ -5,3 +5,8 @@
   hosts: proxmox
   roles:
     - base
+
+- name: create user freakout
+  hosts: proxmox
+  roles:
+    - user
