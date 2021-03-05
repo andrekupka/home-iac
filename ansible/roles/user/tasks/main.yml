@@ -3,3 +3,9 @@
 - name: create user and group
   include_tasks: 'create_user_and_group.yml'
 
+- name: setup dotfiles for user
+  vars:
+    ansible_user: '{{ user_name }}'
+  include_tasks: 'setup_dotfiles.yml'
+  tags:
+    - dotfiles

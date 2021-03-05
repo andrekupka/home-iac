@@ -1,0 +1,17 @@
+---
+
+- name: download dotfiles installer
+  get_url:
+    url: 'https://raw.githubusercontent.com/andrekupka/dotfiles/master/install.sh'
+    dest: '/tmp/dotfiles-install.sh'
+    mode: '0755'
+
+- name: install dotfiles
+  shell:
+    chdir: '/home/{{ user_name }}'
+    cmd: '/tmp/dotfiles-install.sh -y'
+
+- name: make sure dotfiles installer is removed aftewards
+  file:
+    path: '/tmp/dotfiles-install.sh'
+    state: absent

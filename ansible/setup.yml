@@ -1,12 +1,16 @@
 ---
-# this playbook performs a basic debian setup
+# this playbook performs a basic debian setup with own user
 
 - name: setup basic configuration
   hosts: proxmox
   roles:
     - base
+  tags:
+    - base
 
 - name: create user freakout
   hosts: proxmox
   roles:
+    - user
+  tags:
     - user
