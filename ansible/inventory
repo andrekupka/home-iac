@@ -1,2 +1,3 @@
 [proxmox]
-test-vm.home.andrekupka.de
+test-vm ansible_host=test-vm.home.andrekupka.de
+pihole-ng ansible_host=pihole-ng.home.andrekupka.de
