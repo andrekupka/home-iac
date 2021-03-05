@@ -11,7 +11,7 @@
     chdir: '/home/{{ user_name }}'
     cmd: '/tmp/dotfiles-install.sh -y'
 
-- name: make sure dotfiles installer is removed aftewards
+- name: make sure dotfiles installer is removed afterwards
   file:
     path: '/tmp/dotfiles-install.sh'
     state: absent
