@@ -2,3 +2,6 @@
 
 - name: install basic pihole
   include_tasks: 'install_pihole.yml'
+
+- name: enable tls for pihole
+  include_tasks: 'enable_tls.yml'

@@ -1,0 +1,30 @@
+---
+
+- name: copy ca certificate
+  become: true
+  copy:
+    dest: /etc/lighttpd/ca.crt
+    content: |
+      {{ common_ca_certificate }}
+    mode: '0644'
+    owner: www-data
+    group: root
+
+- name: create combined pihole certificate and key
+  become: true
+  copy:
+    dest: /etc/lighttpd/pihole_combined.pem
+    content: |
+      {{ pihole_certificate_key }}
+      {{ pihole_certificate }}
+    mode: '0600'
+    owner: www-data
+    group: root
+
+- name: create lighttpd tls configuration
+  become: true
+  template:
+    src: external.conf
+    dest: '/etc/lighttpd/external.conf'
+    mode: '0644'
+  notify: restart lighttpd
