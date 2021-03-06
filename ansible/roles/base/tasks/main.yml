@@ -3,6 +3,9 @@
 - name: installation of basic packages
   include_tasks: "install_packages.yml"
 
+- name: fix network setup
+  include_tasks: "fix_network_setup.yml"
+
 - name: setup locales
   include_tasks: "setup_locales.yml"
 

@@ -1,0 +1,16 @@
+---
+
+# cloud-init always configures a nameserver and search domain in the default debian cloud init template
+# thus the cloud-init network config is exchanged and the vm is reboot to regenerate the derived resolv.conf
+- name: use own cloud init network coniguration template
+  become: true
+  template:
+    src: network-50-cloud-init
+    dest: /etc/network/interfaces.d/50-cloud-init
+  register: network_config_result
+
+- name: reboot when network config changed
+  become: true
+  reboot:
+    reboot_timeout: 120
+  when: network_config_result is changed
