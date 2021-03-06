@@ -1,0 +1,4 @@
+---
+
+- name: install basic pihole
+  include_tasks: 'install_pihole.yml'

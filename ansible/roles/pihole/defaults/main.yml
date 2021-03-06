@@ -1,0 +1,4 @@
+---
+
+pihole_interface: eth0
+pihole_dns_ip: 10.7.1.1

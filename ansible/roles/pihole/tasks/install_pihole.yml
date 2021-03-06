@@ -1,0 +1,54 @@
+---
+
+- name: check if pihole is installed
+  stat:
+    path: '/usr/local/bin/pihole'
+  register: pihole_binary
+
+- name: set pihole installed fact
+  set_fact:
+    pihole_installed: '{{ pihole_binary.stat.exists | default(false) }}'
+
+- name: set ip address fact
+  set_fact:
+    pihole_interface_ip: "{{ lookup('vars', 'ansible_' + pihole_interface).ipv4.address }}"
+  when: not pihole_installed
+
+- name: make sure pihole directory exists
+  become: true
+  file:
+    path: /etc/pihole
+    state: directory
+  when: not pihole_installed
+
+- name: create pihole setupVars.conf
+  become: true
+  template:
+    src: setupVars.conf
+    dest: /etc/pihole/setupVars.conf
+  when: not pihole_installed
+
+- name: download installer
+  get_url:
+    url: 'https://raw.githubusercontent.com/pi-hole/pi-hole/master/automated%20install/basic-install.sh'
+    dest: '/tmp/install-pihole.sh'
+    mode: u+rwx
+  when: not pihole_installed
+
+- name: run installer
+  become: true
+  shell:
+    cmd: '/tmp/install-pihole.sh --unattended'
+  when: not pihole_installed
+
+- name: make sure installer is removed afterwards
+  file:
+    path: '/tmp/install-pihole.sh'
+    state: absent
+
+- name: set pihole web-admin password
+  become: true
+  shell:
+    cmd: 'pihole -a -p {{ pihole_admin_password }}'
+  changed_when: true
+  check_mode: false

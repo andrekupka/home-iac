@@ -1,0 +1,9 @@
+---
+# this playbook installs pihole
+
+- name: setup basic configuration
+  hosts: pihole-ng
+  roles:
+    - pihole
+  tags:
+    - pihole
