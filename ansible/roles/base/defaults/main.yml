@@ -14,4 +14,4 @@ base_exim4_relay_port: 587
 base_exim4_relay_user: 'system@andrekupka.de'
 base_exim4_outgoing_mail_domain: 'andrekupka.de'
 
-base_unattended_upgrades_notification_mail: 'notification@andrekupka.de'
+base_unattended_upgrades_notification_mail: 'me-notification@andrekupka.de'
