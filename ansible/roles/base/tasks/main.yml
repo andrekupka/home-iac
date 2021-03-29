@@ -20,3 +20,6 @@
 
 - name: setup unattended-upgrades
   include_tasks: "setup_unattended_upgrades.yml"
+
+- name: setup node-exporter
+  include_tasks: "setup_node_exporter.yml"

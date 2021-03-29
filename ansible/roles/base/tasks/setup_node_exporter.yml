@@ -1,0 +1,14 @@
+---
+
+- name: install node-exporter
+  become: true
+  package:
+    name:
+      - 'prometheus-node-exporter'
+
+- name: enabled node-exporter 
+  become: true
+  systemd:
+    name: prometheus-node-exporter
+    enabled: true
+    state: started
