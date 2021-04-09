@@ -6,7 +6,7 @@ module "vm" {
   mac_address = "92:8B:72:C2:DA:59"
 
   cores = 1
-  disk_size = "2G"
+  disk_size = "3G"
   memory = 256
 }
 
