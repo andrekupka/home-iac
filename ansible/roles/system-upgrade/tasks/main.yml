@@ -1,0 +1,21 @@
+---
+
+- name: Update apt package index
+  become: true
+  apt:
+    update_cache: yes
+
+- name: Perform upgrade of all packages to the latest version
+  become: true
+  apt:
+    upgrade: dist
+
+- name: Check if a reboot is required
+  stat: path=/var/run/reboot-required get_md5=no
+  register: reboot_flag
+
+- name: Reboot if necessary
+  become: true
+  reboot:
+    reboot_timeout: 120
+  when: reboot_flag.stat.exists == true

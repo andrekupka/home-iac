@@ -1,0 +1,9 @@
+---
+# this playbook upgrades a whole system
+
+- name: setup basic configuration
+  hosts: pihole
+  roles:
+    - system-upgrade
+  tags:
+    - system-upgrade
