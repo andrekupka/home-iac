@@ -15,7 +15,7 @@
     group: '{{ user_group_name }}'
     groups: '{{ user_group_names_extra | join(",") }}'
     shell: '/usr/bin/zsh'
-    password: "{{ user_password | password_hash('sha512', user_salt) }}"
+    password: "{{ user_password | password_hash('sha512') }}"
 
 - name: update authorized keys
   become: true
